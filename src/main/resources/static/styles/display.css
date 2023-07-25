@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+.table tr td, th {
+	text-align: center;
+	vertical-align: middle;
+}
+
+h2 {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+table thead tr {
+	background-color: black;
+}
+
+table thead tr th {
+	color: white;
+}
+
+tbody tr:nth-child(odd) td {
+	background-color: white;
+	font-weight: 100;
+}
+
+tbody tr:nth-child(even) td {
+	background-color: ghostwhite;
+	font-weight: 100;
+}

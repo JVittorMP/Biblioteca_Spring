@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listagem de Livros</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link th:href="@{/styles/display.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container">
+		<h2>Listagem de Livros</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Título</th>
+					<th>Autor</th>
+					<th>Ano de Publicação</th>
+					<th>Disponível</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="livro: ${livros}">
+					<td th:text="${livro.id}"></td>
+					<td th:text="${livro.titulo}"></td>
+					<td th:text="${livro.autor}"></td>
+					<td th:text="${livro.anoPublicacao}"></td>
+					<td th:text="${livro.disponivel} ? Sim : Não"></td>
+					<td><a th:href="@{/view/livro/atualizar(id=${livro.id})}" class="btn btn-primary">Atualizar</a></td>
+					<td><a th:href="@{/view/livro/deletar(id=${livro.id})}" class="btn btn-danger">Deletar</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<a th:href="@{/view/livro/cadastrar}" class="btn btn-success">Cadastrar</a>
+			<a th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

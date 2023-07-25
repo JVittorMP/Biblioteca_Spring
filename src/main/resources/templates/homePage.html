@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Biblioteca</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<style>
+	p {
+		text-align: center;
+		padding: 1rem;
+		margin-bottom: 0;
+	}
+</style>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Sistema de Biblioteca</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/login}">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<h1 class="display-4 mt-5" style="padding-bottom: 15px;">Sistema de Biblioteca</h1>
+		<div class="row mx-md-n5" style="padding-bottom: 1rem;">
+			<div class="col px-md-5">
+				<div class="p-3 border bg-light" style="text-align: center;">
+					<strong>Usuario</strong>
+				</div>
+			</div>
+			<div class="col px-md-5">
+				<div class="p-3 border bg-light" style="text-align: center;">
+					<strong>Livro</strong>
+				</div>
+			</div>
+			<div class="col px-md-5">
+				<div class="p-3 border bg-light" style="text-align: center;">
+					<strong>Emprestimo</strong>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-md-n5">
+			<div class="col px-md-5">
+				<p><a th:href="@{/view/usuario/lista}" class="btn btn-primary">Listagem</a></p>
+				<p><a th:href="@{/view/usuario/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+			</div>
+			<div class="col px-md-5">
+				<p><a th:href="@{/view/livro/lista}" class="btn btn-primary">Listagem</a></p>
+				<p><a th:href="@{/view/livro/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+			</div>
+			<div class="col px-md-5">
+				<p><a th:href="@{/view/emprestimo/lista}" class="btn btn-primary">Listagem</a></p>
+				<p><a th:href="@{/view/emprestimo/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+			</div>
+		</div>
+	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listagem de Usuarios</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link th:href="@{/styles/display.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container">
+		<h2>Listagem de Usuarios</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Telefone</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario: ${usuarios}">
+					<td th:text="${usuario.id}"></td>
+					<td th:text="${usuario.nome}"></td>
+					<td th:text="${usuario.email}"></td>
+					<td th:text="${usuario.telefone}"></td>
+					<td>
+						<a th:href="@{/view/usuario/atualizar(id=${usuario.id})}" class="btn btn-primary">Atualizar</a>
+					</td>
+					<td>
+						<a th:href="@{/view/usuario/deletar(id=${usuario.id})}" class="btn btn-danger">Deletar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<a th:href="@{/view/usuario/cadastrar}" class="btn btn-success">Cadastrar</a>
+			<a th:href="@{/}" class="btn btn-primary" >Voltar</a>
+		</div>
+
+	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

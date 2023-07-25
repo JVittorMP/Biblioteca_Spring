@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Livros</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link th:href="@{/styles/data.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2 th:text="${livro.id} ? 'Atualização de Livros' : 'Cadastro de Livros'"></h2>
+        <form action="#" th:action="@{/view/livro}" th:object="${livro}" method="post">
+            <div class="alert alert-success alert-dismissible" role="alert" th:if="${!#strings.isEmpty(sucesso)}">
+				<button type="button" class="close" data-dismiss="alert"></button>
+				<span th:text="${sucesso}"></span>
+			</div>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:attr="hidden=${#strings.isEmpty(erro)}">
+				<button type="button" class="close" data-dismiss="alert"></button>
+				<span th:text="${error}"></span>
+			</div>
+			<div class="form-group">
+				<input type="hidden" th:field="*{id}" class="form-control" id="id">
+			</div>
+			<div class="form-group">
+				<label for="titulo">Título da Obra</label>
+				<input type="text" th:field="*{titulo}" class="form-control" id="titulo">
+			</div>
+			<div class="form-group">
+				<label for="autor">Autor</label>
+				<input type="text" th:field="*{autor}" class="form-control" id="autor">
+			</div>
+			<div class="form-group">
+				<label for="anoPublicacao">Ano de Publicação</label>
+				<input type="number" th:field="*{anoPublicacao}" class="form-control" id="anoPublicacao">
+			</div>
+			<div class="mb-3 row">
+				<div class="col-12 d-grid">
+					<button th:text="*{id} ? 'Atualizar' : 'Cadastrar'" type="submit" class="btn btn-success">Cadastrar</button>
+					<a th:href="@{/view/livro/lista}" class="btn btn-primary">Voltar</a>
+				</div>
+			</div>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

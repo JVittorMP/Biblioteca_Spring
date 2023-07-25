@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listagem de Emprestimos</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link th:href="@{/styles/display.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container">
+		<h2>Listagem de Emprestimos</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome do Usuario</th>
+					<th>Título do Livro</th>
+					<th>Emprestimo</th>
+					<th>Limite</th>
+					<th>Devolução</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="emprestimo: ${emprestimos}">
+					<td th:text="${emprestimo.id}"></td>
+					<td th:text="${emprestimo.usuario.nome}"></td>
+					<td th:text="${emprestimo.livro.titulo}"></td>
+					<td th:text="${emprestimo.data_emprestimo}"></td>
+					<td th:text="${emprestimo.data_limite}"></td>
+					<div>
+						<div th:if="${emprestimo.data_devolucao != null}">
+							<td th:text="${emprestimo.data_devolucao}"></td>
+						</div>
+						<div th:if="${emprestimo.data_devolucao == null}">
+							<td>
+								<a th:href="@{/view/emprestimo/devolver(id=${emprestimo.id})}" class="btn btn-secondary">Devolver</a>
+							</td>
+						</div>
+					</div>
+					<td>
+						<a th:href="@{/view/emprestimo/atualizar(id=${emprestimo.id})}" class="btn btn-primary">Atualizar</a>
+					</td>
+					<td>
+						<a th:href="@{/view/emprestimo/deletar(id=${emprestimo.id})}" class="btn btn-danger">Deletar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<a th:href="@{/view/emprestimo/cadastrar}" class="btn btn-success">Cadastrar</a>
+			<a th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
