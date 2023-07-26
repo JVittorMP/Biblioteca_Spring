@@ -17,7 +17,7 @@
 				<button type="button" class="close" data-dismiss="alert"></button>
 				<span th:text="${sucesso}"></span>
 			</div>
-			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:attr="hidden=${#strings.isEmpty(erro)}">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(error)}">
 				<button type="button" class="close" data-dismiss="alert"></button>
 				<span th:text="${error}"></span>
 			</div>
@@ -26,11 +26,11 @@
 			</div>
 			<div class="form-group">
 				<label for="usuario">Usuario</label>
-				<div th:if="${updatable}">
+				<div th:if="*{id}">
 					<input disabled="true" type="text" th:value="*{usuario.nome}" class="form-control" id="usuario.nome">
 					<input type="hidden" th:field="*{usuario.id}" class="form-control" id="usuario.id">
 				</div>
-				<div th:if="${!updatable}">
+				<div th:unless="*{id}">
 					<select class="form-control" th:field="*{usuario}" id="usuario">
 						<option value="0">Selecione um Usuario</option>
 						<option th:each="user : ${userDropBox}" th:value="${user.id}" th:text="${user.nome}"></option>
@@ -39,11 +39,11 @@
 			</div>
 			<div class="form-group">
 				<label for="livro">Livro</label>
-				<div th:if="${updatable}">
+				<div th:if="*{id}">
 					<input disabled="true" type="text" th:value="*{livro.titulo}" class="form-control" id="livro.titulo">
 					<input type="hidden" th:field="*{livro.id}" class="form-control" id="livro.id">
 				</div>
-				<div th:if="${!updatable}">
+				<div th:unless="*{id}">
 					<select class="form-control" th:field="*{livro}" id="livro">
 						<option value="0">Selecione um Livro</option>
 						<option th:each="book : ${bookDropBox}" th:value="${book.id}" th:text="${book.titulo}"></option>
@@ -59,14 +59,14 @@
 				<input type="date" th:field="*{data_limite}" class="form-control" id="data_limite">
 			</div>
 			<div class="form-group">
-				<div th:if="${updatable}">
+				<div th:if="*{id}">
 					<label for="data_devolucao">Data de Devolução</label>
 					<input type="date" th:field="*{data_devolucao}" class="form-control" id="data_devolucao">
 				</div>
 			</div>
 			<div>
 				<button th:text="*{id} ? 'Atualizar' : 'Cadastrar'" type="submit" class="btn btn-success">Cadastrar</button>
-				<a th:href="@{/view/emprestimo/lista}" class="btn btn-primary">Voltar</a>
+				<a style="color: white" class="btn btn-primary" onclick="history.back()">Voltar</a>
 			</div>
 		</form>
 	</div>

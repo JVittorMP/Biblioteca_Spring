@@ -32,24 +32,27 @@ public class Usuario {
 	private Integer id;
 	
 	@Column(length = 100, nullable = false)
-	@NotBlank(message = "Nome Obrigatório!")
+	@NotBlank(message = "[Nome Obrigatório]")
 	private String nome;
 	
 	@Column(length = 20, nullable = false)
-	@Size(max = 20, message = "Telefone Deve Conter Menos de 20 Caracteres")
+	@Size(max = 20, message = "[Telefone Deve Conter Menos de 20 Caracteres]")
+	@NotBlank(message = "[Telefone Obrigatório]")
 	private String telefone;
 	
 	@Column(length = 100, nullable = false, unique = true)
-	@Email @NotBlank(message = "Campo de Email Obrigatório")
+	@Email @NotBlank(message = "[Campo de Email Obrigatório]")
+	@NotBlank(message = "[Email Obrigatório]")
 	private String email;
 	
 	@Column(nullable = false)
-	@Size(min = 8, message = "Senha Deve Conter no Mínimo 8 Caracteres")
+	@Size(min = 8, message = "[Senha Deve Conter no Mínimo 8 Caracteres]")
+	@NotBlank(message = "[Senha Obrigatória]")
 	private String senha;
 	
 	@Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRole role = UserRole.USER;
+    private UserRole role;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

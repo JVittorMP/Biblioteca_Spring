@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.course.biblioteca.controller.AuthenticationController;
 import com.course.biblioteca.domain.Livro;
 import com.course.biblioteca.service.LivroService;
 
@@ -34,6 +35,7 @@ public class LivroView {
 		List<Livro> livros = livroService.getAllLivros();
 		Collections.sort(livros, (left, right) -> left.getId() - right.getId());
 		modelAndView.addObject("livros", livros);
+		modelAndView.addObject("privileges", AuthenticationController.getSessionPrivileges());
 		return modelAndView;
 	}
 	

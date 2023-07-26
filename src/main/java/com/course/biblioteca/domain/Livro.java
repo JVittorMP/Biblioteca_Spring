@@ -29,19 +29,19 @@ public class Livro {
 	private Integer id;
 	
 	@Column(length = 100, nullable = false)
-	@NotBlank(message = "Campo de Título Incompleto")
+	@NotBlank(message = "[Campo de Título Incompleto]")
 	private String titulo;
 	
 	@Column(length = 100, nullable = false)
-	@NotBlank(message = "Campo de Autor Incompleto")
+	@NotBlank(message = "[Campo de Autor Incompleto]")
 	private String autor;
 	
 	@Column(precision = 4, scale = 0, nullable = false)
-	@NotNull(message = "Campo de Ano de publicação Incompleto")
+	@NotNull(message = "[Campo de Ano de publicação Incompleto]")
 	private Integer anoPublicacao;
 	
 	@Column
-	@NotNull(message = "Disponibilidade Pré-Definida")
+	@NotNull(message = "[Disponibilidade Pré-Definida]")
 	private Boolean disponivel = true;
 	
 	@JsonIgnore

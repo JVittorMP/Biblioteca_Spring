@@ -21,8 +21,10 @@
 					<th>Emprestimo</th>
 					<th>Limite</th>
 					<th>Devolução</th>
-					<th></th>
-					<th></th>
+					<div th:if="${privileges}">
+						<th></th>
+						<th></th>
+					</div>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,22 +40,24 @@
 						</div>
 						<div th:if="${emprestimo.data_devolucao == null}">
 							<td>
-								<a th:href="@{/view/emprestimo/devolver(id=${emprestimo.id})}" class="btn btn-secondary">Devolver</a>
+								<a th:if="${privileges}" th:href="@{/view/emprestimo/devolver(id=${emprestimo.id})}" class="btn btn-secondary">Devolver</a>
 							</td>
 						</div>
 					</div>
-					<td>
-						<a th:href="@{/view/emprestimo/atualizar(id=${emprestimo.id})}" class="btn btn-primary">Atualizar</a>
-					</td>
-					<td>
-						<a th:href="@{/view/emprestimo/deletar(id=${emprestimo.id})}" class="btn btn-danger">Deletar</a>
-					</td>
+					<div th:if="${privileges}">
+						<td>
+							<a th:href="@{/view/emprestimo/atualizar(id=${emprestimo.id})}" class="btn btn-primary">Atualizar</a>
+						</td>
+						<td>
+							<a th:href="@{/view/emprestimo/deletar(id=${emprestimo.id})}" class="btn btn-danger">Deletar</a>
+						</td>
+					</div>
 				</tr>
 			</tbody>
 		</table>
 		<div>
-			<a th:href="@{/view/emprestimo/cadastrar}" class="btn btn-success">Cadastrar</a>
-			<a th:href="@{/}" class="btn btn-primary">Voltar</a>
+			<a th:if="${privileges}" th:href="@{/view/emprestimo/cadastrar}" class="btn btn-success">Cadastrar</a>
+			<a style="color: white" class="btn btn-primary" onclick="history.back()">Voltar</a>
 		</div>
 	</div>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

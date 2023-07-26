@@ -56,15 +56,21 @@
 		<div class="row mx-md-n5">
 			<div class="col px-md-5">
 				<p><a th:href="@{/view/usuario/lista}" class="btn btn-primary">Listagem</a></p>
-				<p><a th:href="@{/view/usuario/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+				<p th:if="${privileges}">
+					<a th:href="@{/view/usuario/cadastrar}" class="btn btn-primary">Cadastro</a>
+				</p>
 			</div>
 			<div class="col px-md-5">
 				<p><a th:href="@{/view/livro/lista}" class="btn btn-primary">Listagem</a></p>
-				<p><a th:href="@{/view/livro/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+				<p th:if="${privileges}">
+					<a th:href="@{/view/livro/cadastrar}" class="btn btn-primary">Cadastro</a>
+				</p>
 			</div>
 			<div class="col px-md-5">
 				<p><a th:href="@{/view/emprestimo/lista}" class="btn btn-primary">Listagem</a></p>
-				<p><a th:href="@{/view/emprestimo/cadastrar}" class="btn btn-primary">Cadastro</a></p>
+				<p th:if="${privileges}">
+					<a th:href="@{/view/emprestimo/cadastrar}" class="btn btn-primary">Cadastro</a>
+				</p>
 			</div>
 		</div>
 	</div>

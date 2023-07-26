@@ -1,16 +1,12 @@
 package com.course.biblioteca.view;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.course.biblioteca.controller.AuthenticationController;
 import com.course.biblioteca.domain.Emprestimo;
 import com.course.biblioteca.service.EmprestimoService;
 import com.course.biblioteca.service.LivroService;
@@ -43,13 +40,11 @@ public class EmprestimoView {
 	
 	@GetMapping("/lista")
 	public ModelAndView listarEmprestimos() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<? extends GrantedAuthority> name = authentication.getAuthorities();
-		System.out.println(name);
 		ModelAndView modelAndView = new ModelAndView("emprestimo/lista-emprestimos");
 		List<Emprestimo> emprestimos = emprestimoService.getAllEmprestimos();
 		Collections.sort(emprestimos, (left, right) -> left.getId() - right.getId());
 		modelAndView.addObject("emprestimos", emprestimos);
+		modelAndView.addObject("privileges", AuthenticationController.getSessionPrivileges());
 		return modelAndView;
 	}
 	
@@ -58,7 +53,6 @@ public class EmprestimoView {
 		ModelAndView modelAndView = new ModelAndView("emprestimo/save-emprestimo");
 		modelAndView.addObject("userDropBox", usuarioService.getAllUsuarios());
 		modelAndView.addObject("bookDropBox", livroService.getAvailableLivros());
-		modelAndView.addObject("updatable", false);
 		return modelAndView;
 	}
 	
@@ -68,7 +62,6 @@ public class EmprestimoView {
 		Emprestimo emprestimo = emprestimoService.getEmprestimo(id);
 		emprestimo.setData_devolucao(LocalDate.now());
 		modelAndView.addObject("emprestimo", emprestimo);
-		modelAndView.addObject("updatable", true);
 		return modelAndView;
 	}
 	
@@ -94,7 +87,6 @@ public class EmprestimoView {
 		String mensagens = "";
 		if (!violations.isEmpty()) {
 			problemas = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("\n"));
-			System.out.println(problemas);
 		} else {
 			emprestimo.getLivro().setDisponivel(false);
 			livroService.saveLivro(emprestimo.getLivro());
@@ -104,7 +96,6 @@ public class EmprestimoView {
 		ModelAndView modelAndView = new ModelAndView("emprestimo/save-emprestimo");
 		modelAndView.addObject("sucesso", mensagens);
 		modelAndView.addObject("error", problemas);
-		modelAndView.addObject("updatable", true);
 		return modelAndView;
 	}
 }

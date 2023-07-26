@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,24 +29,28 @@ public class Emprestimo {
 	
 	@Column(name = "emprestimo")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent(message = "Data de Empréstimo Inválida")
+	@FutureOrPresent(message = "[Data de Empréstimo Inválida]")
+	@NotNull(message = "[Data de Emprestimo Vazia]")
 	private LocalDate data_emprestimo = LocalDate.now();
 	
 	@Column(name = "limite")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent(message = "Data Limite Inválida")
+	@FutureOrPresent(message = "[Data Limite Inválida]")
+	@NotNull(message = "[Data Limite Vazia]")
 	private LocalDate data_limite = LocalDate.now().plusDays(14);
 	
 	@Column(name = "devolucao")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent(message = "Data de Devolução Inválida")
+	@FutureOrPresent(message = "[Data de Devolução Inválida]")
 	private LocalDate data_devolucao;
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario", nullable = false)
+	@NotNull(message = "[Usuario Não Selecionado]")
 	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name = "livro", nullable = false)
+	@NotNull(message = "[Livro Não Selecionado]")
 	private Livro livro;
 }

@@ -16,7 +16,7 @@
 				<button type="button" class="close" data-dismiss="alert"></button>
 				<span th:text="${sucesso}"></span>
 			</div>
-			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:attr="hidden=${#strings.isEmpty(erro)}">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(error)}">
 				<button type="button" class="close" data-dismiss="alert"></button>
 				<span th:text="${error}"></span>
 			</div>
@@ -49,7 +49,7 @@
 			<div class="mb-3 row">
 				<div class="col-12 d-grid">
 					<button th:text="*{id} ? 'Atualizar' : 'Cadastrar'" type="submit" class="btn btn-success">Cadastrar</button>
-					<a th:href="@{/view/usuario/lista}" class="btn btn-primary">Voltar</a>
+					<a style="color: white" class="btn btn-primary" onclick="history.back()">Voltar</a>
 				</div>
 			</div>
         </form>

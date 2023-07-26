@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.course.biblioteca.controller.AuthenticationController;
 import com.course.biblioteca.domain.UserRole;
 import com.course.biblioteca.domain.Usuario;
 import com.course.biblioteca.service.UsuarioService;
@@ -35,6 +36,7 @@ public class UsuarioView {
 		List<Usuario> usuarios = usuarioService.getAllUsuarios();
 		Collections.sort(usuarios, (left, right) -> left.getId() - right.getId());
 		modelAndView.addObject("usuarios", usuarios);
+		modelAndView.addObject("privileges", AuthenticationController.getSessionPrivileges());
 		return modelAndView;
 	}
 	
@@ -72,7 +74,7 @@ public class UsuarioView {
 			mensagens = "Salvo com sucesso!";
 		}
 		ModelAndView modelAndView = new ModelAndView("usuario/save-usuario");
-		modelAndView.addObject("Sucesso", mensagens);
+		modelAndView.addObject("sucesso", mensagens);
 		modelAndView.addObject("error", problemas);
 		return modelAndView;
 	}
